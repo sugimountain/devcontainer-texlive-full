@@ -1,0 +1,91 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/debian
+{
+	"name": "devcontainer-texlive-full",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "texlive/texlive:latest-full",
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		// add non-root user
+		"ghcr.io/devcontainers/features/common-utils": {}
+	},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"latex-workshop.formatting.latex": "latexindent",
+				"latex-workshop.latex.recipe.default": "lastUsed",
+				"latex-workshop.latex.outDir": "out",
+				"latex-workshop.latex.autoBuild.cleanAndRetry.enabled": false,
+				"latex-workshop.latex.autoBuild.run": "onSave",
+				"latex-workshop.synctex.afterBuild.enabled": true,
+				"[latex]": {
+					"editor.formatOnSave": true,
+					//一行が長い場合折り返す（alt + Z で切り替え可能。折り返したくない場合は"off"にしてください）
+					"editor.wordWrap": "on",
+					//約物（。、や括弧など）のみで折り返したい場合、下のコメントアウトを消してください
+					//"editor.wordBreak": "keepAll",
+					//区切り文字を指定
+					"editor.wordSeparators": "./\\()\"'-:,.;<>~!@#$%^&*|+=[]{}`~?゠・，、；：！？．。‘’“”（）｟｠［］〚〛〔〕｛｝〈〉《》「」『』【】〖〗〝〟がてでとにのはへもやを",
+					//半角スペースを除く空白文字（目に見えない文字）にハイライト
+					"editor.unicodeHighlight.invisibleCharacters": true,
+					//対応する括弧に色付け(半角の括弧はデフォルトで色付けされる)
+					"editor.bracketPairColorization.enabled": true,
+					"editor.language.colorizedBracketPairs": [
+						["‘", "’"],
+						["“", "”"],
+						["(", ")"],
+						["（", "）"],
+						["｟", "｠"],
+						["[", "]"],
+						["［", "］"],
+						["〚", "〛"],
+						["〔", "〕"],
+						["{", "}"],
+						["｛", "｝"],
+						["〈", "〉"],
+						["《", "》"],
+						["「", "」"],
+						["『", "』"],
+						["【", "】"],
+						["〖", "〗"],
+						["〝", "〟"]
+					],
+					//下記の記号にハイライトがつかないようにする（全角カンマ『，』などをハイライトしたい場合はその部分を削除すること）
+					"editor.unicodeHighlight.ambiguousCharacters": true,
+					"editor.unicodeHighlight.allowedCharacters": {
+						"゠": true,
+						// "，": true,
+						"；": true,
+						"：": true,
+						"！": true,
+						"？": true,
+						"．": true,
+						"‘": true,
+						"’": true,
+						"（": true,
+						"）": true,
+						"［": true,
+						"］": true,
+						"｛": true,
+						"｝": true,
+						"〔": true,
+						"〕": true,
+						"＜": true,
+						"＞": true,
+						"ノ": true
+					}
+				}
+			},
+			"extensions": [
+				"james-yu.latex-workshop"
+			]
+		}
+	},
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "tlmgr --version",
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	"remoteUser": "vscode"
+}
